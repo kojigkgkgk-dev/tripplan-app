@@ -24,15 +24,14 @@ public class MissionServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) 
             throws ServletException, IOException {
         
-        // 1. パラメータからtripIdを取得（デフォルトは1）
-        int tripId = 1;
+        // 1. パラメータからtripIdを取得（デフォルトは一旦24 ※DBにあるIDに合わせてください）
+        int tripId = 24; 
         String idStr = request.getParameter("tripId");
         try {
             if (idStr != null && !idStr.isEmpty()) {
                 tripId = Integer.parseInt(idStr);
             }
         } catch (NumberFormatException e) {
-            // 数値以外が渡された場合は一覧へリダイレクトするか、エラーページを表示
             response.sendRedirect("TripListServlet");
             return;
         }
@@ -48,7 +47,7 @@ public class MissionServlet extends HttpServlet {
         long dailyGoal = 0;
         long daysRemaining = 0;
 
-        // 3. 計算ロジック（tripが存在する場合のみ実行）
+        // 3. 計算ロジック
         if (trip != null) {
             LocalDate today = LocalDate.now();
             LocalDate departure = trip.getDepartureDate();
@@ -57,14 +56,17 @@ public class MissionServlet extends HttpServlet {
             daysRemaining = ChronoUnit.DAYS.between(today, departure);
             
             if (daysRemaining > 0) {
-                // 必要金額 = 総額 - 現在の貯金額
                 int neededAmount = trip.getTotalBudget() - currentSavings;
                 if (neededAmount > 0) {
                     dailyGoal = neededAmount / daysRemaining;
                 }
+            } else {
+                // 出発日を過ぎている場合は0にする
+                daysRemaining = 0;
             }
         } else {
-            // 旅行データが見つからない場合の処理
+            // IDが見つからない場合はコンソールにログを出してリダイレクト
+            System.out.println("Error: Trip ID " + tripId + " not found in database.");
             response.sendRedirect("TripListServlet");
             return;
         }
