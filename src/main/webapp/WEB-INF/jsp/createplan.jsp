@@ -105,7 +105,7 @@ const jspConfig = {
 <body>
 
 <div id="map"></div>
-<a href="index.jsp" class="btn-home" id="home-btn">🏠</a>
+<a href="tripplan.jsp" class="btn-home" id="home-btn">🏠</a>
 
 <div class="left-panel" id="left-panel">
     <button class="toggle-btn left-toggle" onclick="togglePanel('left-panel')">◀</button>

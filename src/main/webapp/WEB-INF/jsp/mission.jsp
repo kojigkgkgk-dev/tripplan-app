@@ -60,7 +60,7 @@
     </c:choose>
 
     <div style="text-align: center; margin-top: 20px;">
-        <a href="index.jsp" style="text-decoration: none; color: #888; font-size: 0.9em;">← メインメニューへ戻る</a>
+        <a href="tripplan.jsp" style="text-decoration: none; color: #888; font-size: 0.9em;">← メインメニューへ戻る</a>
     </div>
 </div>
 

@@ -138,7 +138,7 @@ var jspConfig = {
 <body>
 
 	<div id="map"></div>
-	<a href="index.jsp" class="btn-home" id="home-btn">🏠</a>
+	<a href="${pageContext.request.contextPath}/TripListServlet" class="btn-home" id="home-btn">🏠</a>
 
 	<div class="left-panel" id="left-panel">
 		<button class="toggle-btn left-toggle"
